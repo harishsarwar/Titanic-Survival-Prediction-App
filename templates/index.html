@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head><title>Titanic Prediction</title></head>
+<body>
+    <h2>Titanic Survival Prediction</h2>
+
+    <!-- shows Welcome, name (ID: user_id) -->
+    <p>Welcome, <strong>{{ name }}</strong> (ID: {{ user_id }})</p>
+
+    <form action="/predict" method="post">
+
+        <!-- hidden fields to carry user_id and name through form submission -->
+        <input type="hidden" name="user_id" value="{{ user_id }}">
+        <input type="hidden" name="name"    value="{{ name }}">
+
+        <label>Passenger Class:</label>
+        <select name="pclass" required>
+            {% for value in pclass_values %}
+                <option value="{{ value }}">{{ value }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Gender:</label>
+        <select name="sex" required>
+            {% for value in sex_values %}
+                <option value="{{ value }}">{{ value|capitalize }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Age:</label>
+        <input type="number" name="age" step="any" required><br><br>
+
+        <label>Siblings/Spouse:</label>
+        <input type="number" name="sibsp" min="0" required><br><br>
+
+        <label>Parents/Children:</label>
+        <input type="number" name="parch" min="0" required><br><br>
+
+        <label>Fare:</label>
+        <input type="number" name="fare" step="any" min="0" required><br><br>
+
+        <label>Port of Embarkation:</label>
+        <select name="embarked" required>
+            {% for value in embarked_values %}
+                <option value="{{ value }}">{{ value }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <input type="submit" value="Predict Survival">
+    </form>
+
+    {% if prediction_text %}
+        <h3>Result: {{ prediction_text }}</h3>
+        <a href="/predictions/{{ user_id }}">View All My Predictions</a>
+    {% endif %}
+
+</body>
+</html>

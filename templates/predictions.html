@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head><title>My Predictions</title></head>
+<body>
+    <h2>Predictions for: {{ user_id }}</h2>
+
+    {% if records %}
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>ID</th><th>Name</th><th>Pclass</th><th>Sex</th>
+            <th>Age</th><th>Sibsp</th><th>Parch</th><th>Fare</th>
+            <th>Embarked</th><th>Prediction</th><th>Edit</th>
+        </tr>
+        {% for r in records %}
+        <tr>
+            <td>{{ r.id }}</td>
+            <td>{{ r.name }}</td>
+            <td>{{ r.pclass }}</td>
+            <td>{{ r.sex }}</td>
+            <td>{{ r.age }}</td>
+            <td>{{ r.sibsp }}</td>
+            <td>{{ r.parch }}</td>
+            <td>{{ r.fare }}</td>
+            <td>{{ r.embarked }}</td>
+            <td>{{ r.prediction }}</td>
+            <td><a href="/edit/{{ r.id }}">Edit</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No predictions yet.</p>
+    {% endif %}
+
+    <br>
+    <a href="/predict?user_id={{ user_id }}&name={{ records[0].name if records else '' }}">
+        Make Another Prediction
+    </a>
+    <br><br>
+
+    <!-- DELETE all records for this user -->
+    <form action="/delete/{{ user_id }}" method="post"
+          onsubmit="return confirm('Delete ALL records for {{ user_id }}? This cannot be undone.')">
+        <button type="submit">🗑 Delete My Account & All Records</button>
+    </form>
+
+    <br>
+    <a href="/">Home</a>
+</body>
+</html>

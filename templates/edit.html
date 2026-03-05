@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head><title>Edit Prediction</title></head>
+<body>
+    <h2>Edit Record #{{ record.id }}</h2>
+    <form action="/edit/{{ record.id }}" method="post">
+
+        <label>Passenger Class:</label>
+        <select name="pclass">
+            {% for value in pclass_values %}
+                <option value="{{ value }}" {% if value == record.pclass %}selected{% endif %}>{{ value }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Gender:</label>
+        <select name="sex">
+            {% for value in sex_values %}
+                <option value="{{ value }}" {% if value == record.sex %}selected{% endif %}>{{ value|capitalize }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Age:</label>
+        <input type="number" name="age" step="any" value="{{ record.age }}"><br><br>
+
+        <label>Siblings/Spouse:</label>
+        <input type="number" name="sibsp" value="{{ record.sibsp }}"><br><br>
+
+        <label>Parents/Children:</label>
+        <input type="number" name="parch" value="{{ record.parch }}"><br><br>
+
+        <label>Fare:</label>
+        <input type="number" name="fare" step="any" value="{{ record.fare }}"><br><br>
+
+        <label>Embarked:</label>
+        <select name="embarked">
+            {% for value in embarked_values %}
+                <option value="{{ value }}" {% if value == record.embarked %}selected{% endif %}>{{ value }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <input type="submit" value="Update">
+    </form>
+    <br>
+    <a href="/predictions/{{ record.user_id }}">Back to My Predictions</a>
+</body>
+</html>
+

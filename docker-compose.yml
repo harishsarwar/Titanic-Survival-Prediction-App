@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    container_name: titanic_app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./titanic.db
+    volumes:
+      - ./titanic.db:/app/titanic.db
