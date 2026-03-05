@@ -1,0 +1,2 @@
+# 🚢 Titanic Survival Prediction App
+A Machine Learning web application that predicts Titanic passenger survival. Built with FastAPI, SQLAlchemy, Docker, and Scikit-learn — covering the full ML lifecycle from training to deployment.
